@@ -1,0 +1,41 @@
+项目组成：
+    项目分为两大部分，第一部分为主机加linux系统以及系统的安防加固。
+第二部分为虚拟机和xp系统。linux采用centos最简安装。虚拟机采用virtua
+lbox。
+    第一部分：linux和安防加固
+	1.linux采用centos最简安装。
+	2.安防加固主要是磁盘加密和nat内网隐藏，这两部分将做为两个单独的文件来说明。
+    3.安装xwindows系统
+	    yum groupinstall 'X Window System'
+	配置显卡驱动：X11/xorg.conf
+	    Section "Device"
+			Identifier "Videocard0"
+			Driver "vesa"
+		EndSectio
+    窗口系统安装完成后需重新启动并按照默认配置显卡,高级显卡驱动的安装配置以单独的文件来说明。	
+	虚拟机将以窗口服务的方式运行，centos启动之后直接启动虚拟机而不是
+系统桌面。
+    第二部分：虚拟机运行环境搭建和xp配置
+	1.虚拟机采用virtualbox
+	可从官网上下载源码包安装:
+	    rpm -ivh Virbox.rpm
+	安装前需要安装支持包：
+		yum install SDL
+		yum install make
+		yum install gcc
+		yum install kernel-devel
+		yum install kernel-headers
+	重新构建virtualbox模块(若安装在安装支持包之前此步骤可跳过)：
+	    /etc/init.d/vboxdrv setup
+	2.虚拟机中安装xp系统
+    虚拟机同样需要以窗口模式运行，具体启动参数可在桌面模式下启动虚拟机软件，通过ps命令或者在proc系统中
+查看cmdline获得。在虚拟中安装xp系统也可拷贝安装好的文件。以窗口模式运行的启动命令同样可通过ps命令或proc
+系统获得。
+    需安装linux音频支持：yum install pulseaudio
+    
+    3.xp配置
+	最终实现xp系统自启动，通过linux nat上网，可播放音频，linux安装显卡驱动。
+	xp系统联网、显卡、音频、自启动的配置将以单独的文件说明。
+
+	2015.12.05 21:06
+	
